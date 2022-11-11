@@ -226,4 +226,32 @@ exports.updateUser= catchAsyncErrors (async(req, res, next)=>{
         user
     })
 })
+//Eliminar usuario (admin)
+exports.deleteUser= catchAsyncErrors (async (req, res, next)=>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler(`Usuario con id: ${req.params.id} 
+        no se encuentra en nuestra base de datos`))
+    }
+
+    await user.remove();
+
+    res.status(200).json({
+        success:true,
+        message:"Usuario eliminado correctamente"
+    })
+})
+
+/* //cuando tenga un parametro de estado y se quiere cambiar
+exports.inactiveUser = catchAsyncErrors(async(req, res, next){
+    const user= await User.findById(req.params.id);
+
+    if(!user){
+        mensaje aqui
+    }
+    user.estado="inactivo"
+    //cuando tenga un parametro de estado
+    res.status(200).json
+})*/
 

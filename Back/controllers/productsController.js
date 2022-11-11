@@ -98,3 +98,99 @@ function verProductoPorID(id){
 }
  
 //verProductoPorID('63546690aee8397ce04de0d2'); 
+
+//Crear o actualizar una review
+exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+    const { rating, comentario, idProducto } = req.body;
+
+    const opinion = {
+        nombreCliente: req.user.nombre,
+        rating: Number(rating),
+        comentario
+    }
+
+    const product = await producto.findById(idProducto);
+
+    const isReviewed = product.opiniones.find(item =>
+        item.nombreCliente === req.user.nombre)
+
+    if (isReviewed) {
+        product.opiniones.forEach(opinion => {
+            if (opinion.nombreCliente === req.user.nombre) {
+                opinion.comentario = comentario,
+                    opinion.rating = rating
+            }
+        })
+    } else {
+        product.opiniones.push(opinion)
+        product.numCalificaciones = product.opiniones.length
+    }
+
+    product.calificacion = product.opiniones.reduce((acc, opinion) =>
+        opinion.rating + acc, 0) / product.opiniones.length
+
+    await product.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+        success: true,
+        message: "Hemos opinado correctamente"
+    })
+
+})
+
+//Ver todas las review de un producto
+exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
+    const product = await producto.findById(req.query.id)
+
+    res.status(200).json({
+        success: true,
+        opiniones: product.opiniones
+    })
+})
+
+//Eliminar review
+exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
+    const product = await producto.findById(req.query.idProducto);
+
+    const opiniones = product.opiniones.filter(opinion => 
+        opinion._id.toString() !== req.query.idReview.toString());
+
+        const numCalificaciones = opiniones.length;
+
+        const calificacion = product.opiniones.reduce((acc, Opinion) =>
+            Opinion.rating + acc, 0) / opiniones.length;
+
+        await producto.findByIdAndUpdate(req.query.idProducto, {
+            opiniones,
+            calificacion,
+            numCalificaciones
+        }, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        })
+        res.status(200).json({
+            success: true,
+            message: "review eliminada correctamente"
+        })
+
+    })
+
+    //HABLEMOS DE FETCH
+    //Ver todos los productos
+    function verProductos() {
+        fetch('http://localhost:4000/api/productos')
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
+    }
+
+    //verProductos(); LLamamos al metodo creado para probar la consulta
+
+    //Ver por id
+    function verProductoPorID(id) {
+        fetch('http://localhost:4000/api/producto/' + id)
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
+    }

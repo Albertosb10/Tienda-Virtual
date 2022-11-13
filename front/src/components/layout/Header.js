@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react'
 import { Link } from 'react-router-dom'
 import "../../App.css"
+import { Search } from './Search'
 
 const Header = () => {
 
@@ -9,23 +10,13 @@ const Header = () => {
             <nav className='navbar row'>
                 <div className='col-12 col-md-3'>
                     <div className='navbar-brand'>
-                        <Link to="/"> <img src="./images/logo.png" class = "img-fluid" alt="SBS Logo"></img></Link>
+                        <Link to="/"> <img src="../images/logo.png" class = "img-fluid" alt="SBS Logo"></img></Link>
                     </div>
                 </div>
 
                 <div className='col-12 col-md-6 mt-2 mt-md-0'>
-                    <div className="input-group">
-                        <input
-                            type="text"
-                            id="search_field"
-                            class="form-control"
-                            placeholder='Que producto busca?'></input>
-                        <div class="input-group-append">
-                            <button id="search-btn" class="btn">
-                                <i class="fa fa-search-plus fa-3x text-white" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
+                {/*Aqui va buscar*/}
+                <Search />
                 </div>
                 <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
                 <div className="ml-4 dropdown d-inline">

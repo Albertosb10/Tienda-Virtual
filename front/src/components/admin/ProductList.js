@@ -9,7 +9,7 @@ import { getProducts } from '../../actions/productActions'
 import {Link } from "react-router-dom"
 
 export const ProductsList = () => {
-    const { loading, productos, error} = useSelector(state=> state.products)
+    const { loading, products, error} = useSelector(state=> state.products)
     const alert= useAlert();
 
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export const ProductsList = () => {
 
     const setProducts = () => {
         const data = {
-            columns: [ 
+            columns: [
                 {
                     label: 'Nombre',
                     field: 'nombre',
@@ -52,10 +52,10 @@ export const ProductsList = () => {
             rows: []
         }
 
-        productos.forEach(product => {
+        products.forEach(product => {
             data.rows.push({
                 nombre: product.nombre,
-                precio: `$${product.precio}`, //because is a value
+                precio: `$${product.precio}`,
                 inventario: product.inventario,
                 vendedor: product.vendedor,
                 actions: <Fragment>
@@ -68,7 +68,7 @@ export const ProductsList = () => {
                     <Link to="/" className="btn btn-danger py-1 px-2">
                         <i className="fa fa-trash"></i>
                     </Link>
-
+                    
 
                 </Fragment>
             })
@@ -81,15 +81,15 @@ export const ProductsList = () => {
         <Fragment>
             <MetaData title={'All Products'} />
             <div className="row">
-                <div className="col-12 col-md-3">
+                <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
 
-                <div className="col-12 col-md-9">
+                <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">All Products</h1>
+                        <h1 className="my-5">Productos Registrados</h1>
 
-                        {loading ? <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> :(
+                        {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> :(
                             <MDBDataTable
                                 data={setProducts()}
                                 className="px-3"

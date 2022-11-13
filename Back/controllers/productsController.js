@@ -7,7 +7,7 @@ const fetch =(url)=>import('node-fetch').then(({default:fetch})=>fetch(url)); //
 //ver la lista de productos
 exports.getProducts=catchAsyncErrors(async (req,res,next) =>{
 
-    const resPerPage = 3;
+    const resPerPage = 4;
     const productsCount = await producto.countDocuments();
 
     const apiFeatures = new APIFeatures(producto.find(), req.query)
@@ -28,7 +28,7 @@ exports.getProducts=catchAsyncErrors(async (req,res,next) =>{
     })
 
 
-    const productos= await producto.find();
+    /*const productos= await producto.find();
     if (!productos){
         return next(new ErrorHandler("Informacion no encontrada", 404))
     }
@@ -38,7 +38,7 @@ exports.getProducts=catchAsyncErrors(async (req,res,next) =>{
         cantidad: productos.length,
         productos
         //message: "En esta ruta ud podra ver todos los productos" for show a message
-    })
+    })*/
 })
           
 //ver un prodcuto  por id

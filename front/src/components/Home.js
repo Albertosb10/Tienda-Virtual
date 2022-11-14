@@ -6,7 +6,6 @@ import { useParams, Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 
-
 export const Home = () => {
     const params= useParams();
     const keyword= params.keyword;
@@ -20,7 +19,7 @@ export const Home = () => {
             return alert.error(error)
         }
 
-        dispatch(getProducts(currentPage, keyword));
+        dispatch(getProducts(currentPage, keyword ));
     }, [dispatch, alert, error, currentPage, keyword])
 
     function setCurrentPageNo(pageNumber){

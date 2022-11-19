@@ -30,7 +30,7 @@ export const Search = () => {
 
     <div class="input-group-append">
         <button id="search_btn" class="btn">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <i class="fa fa-search"  style={{color: 'whitesmoke'}} aria-hidden="true"></i>
         </button>
     </div>
 </div>

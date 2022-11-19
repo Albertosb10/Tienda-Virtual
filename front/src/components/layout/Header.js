@@ -46,7 +46,7 @@ const Header = () => {
                                         alt={user && user.nombre}
                                         className="rounded-circle"></img>
                                 </figure>
-                                <span>{user && user.nombre}</span>
+                                <span style={{color: '#000000'}}>{user && user.nombre} </span>
                             </Link>
                             <div className='dropdown-menu' aria-labelledby='dropDownMenu'>
                                 {/*Preguntamos el rol de quien esta online*/}

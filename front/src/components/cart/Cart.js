@@ -63,7 +63,7 @@ const Cart = () => {
 
                                                     <input type="number" className="form-control count d-inline" value={item.quantity} readOnly />
 
-                                                    <span className="btn btn-primary plus" onClick={()=>increaseQty(item.product, item.quantity, item.inventario)}>+</span>
+                                                    <span className="btn btn-success plus" onClick={()=>increaseQty(item.product, item.quantity, item.inventario)}>+</span>
                                                 </div>
                                             </div>
 

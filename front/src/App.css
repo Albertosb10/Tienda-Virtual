@@ -229,7 +229,8 @@ footer {
 }
 
 .cart-item a {
-  color: grey;
+  color: #763fb9;
+  font-weight: bold
 }
 
 #delete_cart_item {
@@ -241,15 +242,15 @@ footer {
 }
 
 #card_item_price {
-  color: #febd69;
+  color: #a5a3a7;
   font-weight: bold;
   font-size: 1.4rem;
 }
 
 #checkout_btn,
 .review-btn {
-  background-color: #fa9c23;
-  border-color: #fa9c23;
+  background-color: #763fb9;
+  border-color: #763fb9;
   margin-top: 2rem;
   border-radius: 5rem;
 }

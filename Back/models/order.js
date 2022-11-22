@@ -6,10 +6,6 @@ const orderSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        departamento: {
-            type: String,
-            required: true
-        },
         ciudad: {
             type: String,
             required: true

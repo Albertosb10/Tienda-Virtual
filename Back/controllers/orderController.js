@@ -6,7 +6,7 @@ const ErrorHandler = require("../utils/errorHandler");
 //Crear una nueva orden
 exports.newOrder= catchAsyncErrors (async (req, res, next)=>{
     const {
-        Items,
+        items,
         envioInfo,
         precioItems,
         precioImpuesto,
@@ -16,7 +16,7 @@ exports.newOrder= catchAsyncErrors (async (req, res, next)=>{
     } = req.body;
 
     const order= await Order.create({
-        Items,
+        items,
         envioInfo,
         precioItems,
         precioImpuesto,
@@ -26,6 +26,7 @@ exports.newOrder= catchAsyncErrors (async (req, res, next)=>{
         fechaPago: Date.now(),
         user: req.user._id
     })
+
     res.status(201).json({
         success:true,
         order
@@ -98,7 +99,6 @@ exports.updateOrder= catchAsyncErrors(async(req, res, next)=>{
     })
 })
 
-//Update Stock
 async function updateStock(id, quantity){
     const product = await Product.findById(id);
     product.inventario= product.inventario-quantity;
